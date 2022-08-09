@@ -1,0 +1,27 @@
+--/or/ command 
+    SELECT title FROM songs WHERE mood = "epic" OR released >1990;
+    --/ and/ command 
+    SELECT title FROM songs WHERE mood = "epic" AND released > 1990 AND duration < 240
+    
+   SELECT * FROM exercise_logs WHERE type = "biking" OR type = "hiking" OR type = "tree climbing" OR type = "rowing";
+
+/* IN */ is a shortcut or a neater way to write the querry above. type allows you to select individual items in a column 
+/*NOT IN*/ does the inverse of the IN command, that is, what is not in ()
+SELECT * FROM exercise_logs WHERE type IN ("biking", "hiking", "tree climbing", "rowing");
+*insert new table*
+SELECT type FROM drs_favorites;
+
+/subqueries/ 
+-can select items that are in both tables in common 
+SELECT * FROM exercise_logs WHERE type IN (
+    SELECT type FROM drs_favorites);
+    
+SELECT * FROM exercise_logs WHERE type IN (
+    SELECT type FROM drs_favorites WHERE reason = "Increases cardiovascular health");
+ 
+ -This functions allows you to shorten the name in the actual table to find the one word that is common in the sentence 
+ - the use of % is necessary to represent a wildcard that allows the function to work 
+/* LIKE */
+
+SELECT * FROM exercise_logs WHERE type IN (
+    SELECT type FROM drs_favorites WHERE reason LIKE "%cardiovascular%");
