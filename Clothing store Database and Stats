@@ -1,0 +1,30 @@
+--Create a clothing store database
+
+CREATE TABLE clothing (id INTEGER PRIMARY KEY, Item TEXT, Quantity INTEGER, Price INTEGER, Popularity INTEGER);
+
+--Where popularity is measured on a scale of 1-10 and price is measured in USD
+
+INSERT INTO clothing VALUES (1, "dress shirt", 60, 75,6);
+INSERT INTO clothing VALUES (2, "shirt", 108, 31, 9);
+INSERT INTO clothing VALUES (3, "socks", 29, 10, 4);
+INSERT INTO clothing VALUES (4, "mini-skirt", 82, 59, 6);
+INSERT INTO clothing VALUES (5, "long-skirt", 31, 47, 3); 
+INSERT INTO clothing VALUES (6, "shorts", 120, 39, 10);
+INSERT INTO clothing VALUES (7, "dress-pants", 54, 110, 5);
+INSERT INTO clothing VALUES (8, "jeans", 189, 100, 10);
+INSERT INTO clothing VALUES (9, "baby clothes", 85, 38, 7);
+INSERT INTO clothing VALUES (10, "sportswear", 98, 80, 8);
+INSERT INTO clothing VALUES (11, "raincoats", 20,18, 2);
+INSERT INTO clothing VALUES (12, "scarfs", 31,19,4);
+INSERT INTO clothing VALUES (13, "hats", 84, 23, 7);
+INSERT INTO clothing VALUES (14, "coats", 68, 140, 6);
+INSERT INTO clothing VALUES (15, "dress", 103, 95, 9);
+
+--display the database ordered by price 
+SELECT * FROM clothing ORDER BY price ;
+
+--What items have a higher popularity than 5?
+SELECT item, price, popularity FROM clothing WHERE popularity >5 ORDER BY popularity;
+
+--What is the popularity of the items in the clothing store on average?
+SELECT AVG(popularity) FROM clothing;
