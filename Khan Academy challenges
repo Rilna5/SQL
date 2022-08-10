@@ -25,3 +25,32 @@ SELECT * FROM exercise_logs WHERE type IN (
 
 SELECT * FROM exercise_logs WHERE type IN (
     SELECT type FROM drs_favorites WHERE reason LIKE "%cardiovascular%");
+Math operators may be used at any point in sql 
+Round function may also be used in sql 
+
+/CASE/ function is used to create a new column 
+
+/* 50-90% of max*/
+SELECT COUNT(*) FROM exercise_logs WHERE
+    heart_rate >= ROUND(0.50 * (220-30)) 
+    AND  heart_rate <= ROUND(0.90 * (220-30));
+    
+/* CASE */
+SELECT type, heart_rate,
+    CASE 
+        WHEN heart_rate > 220-30 THEN "above max"
+        WHEN heart_rate > ROUND(0.90 * (220-30)) THEN "above target"
+        WHEN heart_rate > ROUND(0.50 * (220-30)) THEN "within target"
+        ELSE "below target"
+    END as "hr_zone"
+FROM exercise_logs;
+
+SELECT COUNT(*) number_grade, 
+CASE 
+    WHEN number_grade >90 THEN "A"
+    WHEN number_grade >80 THEN "B"
+    WHEN number_grade >70 THEN "C"
+    ELSE "F"
+END as "letter_grade"
+FROM student_grades
+GROUP BY "letter_grade";
