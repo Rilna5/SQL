@@ -55,30 +55,6 @@ END as "letter_grade"
 FROM student_grades
 GROUP BY "letter_grade";
 
-SELECT Name, Type_1, Type_2, Legendary, Generation, HP FROM pokemon ORDER BY HP DESC LIMIT 20;
+--/JOIN FUNCTION/
 
-SELECT Name, Type_1, Type_2, HP,
-CASE
-    WHEN HP > 150 THEN "Very Strong"
-    WHEN HP > 80 THEN "Strong"
-    ELSE "Weak"
-    END as "Strength"
-FROM pokemon; 
-
-SELECT Name, Type_1,SUM(Speed) AS "Total Speed" FROM pokemon GROUP BY Type_1; 
-
-SELECT COUNT(*), 
-CASE
-    WHEN HP > 150 THEN "Very Strong"
-    WHEN HP > 80 THEN "Strong"
-    ELSE "Weak"
-    END as "Strength"
-FROM pokemon
-GROUP BY "Strength"; 
-
-SELECT Name, Type_1, MAX(Attack) AS "Maximum Attack", MAX(Defense) AS "Maximum Defense" FROM pokemon GROUP BY Type_1;
-
-SELECT * FROM pokemon WHERE Attack <190 AND Defense > 140; 
-
-SELECT Name, Type_1, Generation, AVG(Speed) AS "Average Speed" FROM pokemon GROUP BY Type_1 Having Average Speed >= 20;
 
