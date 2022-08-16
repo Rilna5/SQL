@@ -56,5 +56,123 @@ FROM student_grades
 GROUP BY "letter_grade";
 
 --/JOIN FUNCTION/
+allows you to join data from different tables 
+select *
+(Specify the two tables)
+FROM martian --"left table"
+INNER JOIN base -- "right table" 
+(Specify how to connect the tables)
+ON martian.base_id = base.base_id; (martian and base are the table and base 
+is the column id)
+ 
+Once the new table has been created we can now write the following function 
+SELECT first_name, last_name, base_name
+FROM martian
+INNER JOIN base 
+ON martian.base_id= base.base_id;
 
+--HOW TO INCLUDE ROWS THAT DO NOT HAVE A MATCH:
+SELECT column1, column2,...
+FROM martian
+-----JOIN base
+ON martian.base_id = base.base_id 
+WHERE condition(s)
+ORDER BY value 
+  
+ INNER JOIN - only returns connected,matching rows 
+ LEFT JOIN - Returns all connected rows, and unconnected rows from left table (nulls in right)
+ RIGHT JOIN - Returns all connected rows, and unconnected rows from right table (nulls in left)
+ FULL JOIN - Returns connected rows & unconnected rows from both left and right tables
+ my sql and sqllite do not support full joins 
+ 
+ ** IMPORTANT TO SPECIFY BOTH COLUMN N TABLE NAME IN THE SELECT QUERY 
+ SELECT martian(m).martian_id, base(b).base_id, base(b).base_name 
+ FROM martian AS m (the as m makes it shorter to write the names)
+ INNER JOIN base AS b 
+ ON martian(m).base_id = base(b).base_id;
 
+/* cross join */
+-- not the most useful of joins
+SELECT * FROM student_grades, students;
+
+/* implicit inner join */
+SELECT * FROM student_grades, students
+    WHERE student_grades.student_id = students.id;
+    
+/* explicit inner join - JOIN */
+-- best practice to use
+--Important to specify the table that the column in from to avoid confusing the alg if in both tables there are columns with similar names
+SELECT students.first_name, students.last_name, students.email, student_grades.test, student_grades.grade FROM students
+    JOIN student_grades
+    ON students.id = student_grades.student_id
+    WHERE grade > 90;
+    
+ /* outer join */ 
+SELECT students.first_name, students.last_name, student_projects.title
+    FROM students (left table is after the from and right table is after the join)
+    LEFT OUTER JOIN student_projects
+    ON students.id = student_projects.student_id;
+ This tells sql to keep the rows in the left table even if they do not match in the right table
+ 
+ --EXAMPLE 
+ Now, create another query that will result in one row per each customer, with their name, email, and total amount of money they've spent on orders. Sort the rows according to the total money spent, from the most spent to the least spent.
+SELECT c.name, c.email, SUM(o.price) AS spent 
+FROM customers as c 
+LEFT OUTER JOIN orders as o 
+ON c.id = o.customer_id 
+GROUP BY c.name 
+ORDER BY spent desc; 
+
+/* self join */
+SELECT students.first_name, students.last_name, buddies.email as buddy_email
+    FROM students
+    JOIN students buddies
+    ON students.buddy_id = buddies.id;
+    
+buddies is an alias used when joining info within the same table 
+buddies.id is the new table with the og id 
+
+/*Combining multiple joins*/
+SELECT a.title, b.title FROM project_pairs (the from section should be with the one that as the 2 datasets)
+    JOIN student_projects a
+    ON project_pairs.project1_id = a.id
+    JOIN student_projects b
+    ON project_pairs.project2_id = b.id;
+
+CREATE TABLE artist (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    name TEXT, age INTEGER); 
+    
+INSERT INTO artist (name, age) VALUES ("BTS", "25"); 
+INSERT INTO artist (name, age) VALUES ("Rihanna", "34");
+INSERT INTO artist (name, age) VALUES ("Emminem", "49");
+INSERT INTO artist (name, age) VALUES ("DJ Khaled", "46");
+INSERT INTO artist (name, age) VALUES ("J-Hope", "28");
+INSERT INTO artist (name, age) VALUES ("Taylor Swift", "32");
+INSERT INTO artist (name, age) VALUES ("INNA", "35");
+INSERT INTO artist (name, age) VALUES ("Indila","38");
+INSERT INTO artist (name, age) VALUES ("Madison Beer", "23");
+INSERT INTO artist (name, age) VALUES ("Becky G", "25");
+
+CREATE TABLE songs (
+id INTEGER PRIMARY KEY AUTOINCREMENT, 
+song_id INTEGER, title TEXT, release INTEGER);
+
+INSERT INTO songs (song_id,title,release) VALUES (1,"Tomorrow","2014");
+INSERT INTO songs (song_id,title,release) VALUES (2,"Monster","2013");
+INSERT INTO songs (song_id,title,release) VALUES (3,"Monster","2013");
+
+CREATE TABLE collab (
+id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    artist1_id INTEGER, 
+    artist2_id INTEGER, 
+  song_id INTEGER); 
+    
+INSERT INTO collab (artist1_id, artist2_id, song_id) VALUES (2,3, 2); 
+INSERT INTO collab (artist1_id, artist2_id, song_id) VALUES (2,4,1);
+
+select a1.name,a2.name,s.title from collab
+join artist a1 on a1.id=collab.artist1_id
+join artist a2 on a2.id=collab.artist2_id 
+join songs s on s.id = collab.song_id; 
+  
