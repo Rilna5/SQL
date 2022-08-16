@@ -176,3 +176,83 @@ join artist a1 on a1.id=collab.artist1_id
 join artist a2 on a2.id=collab.artist2_id 
 join songs s on s.id = collab.song_id; 
   
+  CREATE TABLE artist (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    name TEXT, age INTEGER); 
+    
+INSERT INTO artist (name, age) VALUES ("BTS", "25"); 
+INSERT INTO artist (name, age) VALUES ("Rihanna", "34");
+INSERT INTO artist (name, age) VALUES ("Emminem", "49");
+INSERT INTO artist (name, age) VALUES ("DJ Khaled", "46");
+INSERT INTO artist (name, age) VALUES ("J-Hope", "28");
+INSERT INTO artist (name, age) VALUES ("Taylor Swift", "32");
+INSERT INTO artist (name, age) VALUES ("INNA", "35");
+INSERT INTO artist (name, age) VALUES ("Indila","38");
+INSERT INTO artist (name, age) VALUES ("Madison Beer", "23");
+INSERT INTO artist (name, age) VALUES ("Becky G", "25");
+INSERT INTO artist (name, age) VALUES ("Calvin Harris","38");
+INSERT INTO artist (name, age) VALUES ("Ava Max","28");
+INSERT INTO artist (name, age) VALUES ("Ellie Goulding","35");
+INSERT INTO artist (name, age) VALUES ("Stromae","37");
+INSERT INTO artist (name, age) VALUES ("Ed Sheeran","31");
+INSERT INTO artist (name, age) VALUES ("The Weeknd","32");
+INSERT INTO artist (name, age) VALUES ("Billie Eilish","20");
+
+CREATE TABLE songs (
+id INTEGER PRIMARY KEY AUTOINCREMENT, 
+song_id INTEGER, title TEXT, release INTEGER, popularity INTEGER);
+
+INSERT INTO songs (song_id,title,release, popularity) VALUES (1,"Tomorrow","2014",10);
+INSERT INTO songs (song_id,title,release, popularity) VALUES (2,"Monster","2013",7);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (3,"Not Afraid","2010",9);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (4,"Wild Thoughts","2017",10);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (5,"Chicken Noodle Soup","2019",10);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (6,"Red","2012",7);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (7,"Amazing","2009",8);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (8,"Tourner dans le vide","2014",6);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (9,"Good in goodbye","2021",8); 
+INSERT INTO songs (song_id,title,release,popularity) VALUES (10,"Shower","2014",4);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (11,"This is what you came for","2016",10);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (12,"Sweet but Psycho","2018",5);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (13,"Lights","2010",6);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (14,"Papaoutai","2013",10);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (15,"Perfect","2017",4);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (16,"Call out my name","2018",9);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (17,"Happier than ever","2021",3);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (18,"Love me like you do","2015",8);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (19,"Love the way you lie","2010",7);
+INSERT INTO songs (song_id,title,release,popularity) VALUES (20,"Everything has changed","2013",7); 
+
+CREATE TABLE collab (
+id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    artist1_id INTEGER, 
+    artist2_id INTEGER, 
+  song_id INTEGER); 
+    
+INSERT INTO collab (artist1_id, artist2_id, song_id) VALUES (2,3,2); 
+INSERT INTO collab (artist1_id, artist2_id, song_id) VALUES (2,4,4);
+INSERT INTO collab (artist1_id, artist2_id, song_id) VALUES (5,10,5);
+INSERT INTO collab (artist1_id, artist2_id, song_id) VALUES (2,11,11);
+INSERT INTO collab (artist1_id, artist2_id, song_id) VALUES (6,15,20);
+INSERT INTO collab (artist1_id, artist2_id, song_id) VALUES (13,11,18);
+INSERT INTO collab (artist1_id, artist2_id, song_id) VALUES (2,3,19);
+
+/*Cross join*/
+SELECT * FROM artist,songs; 
+
+/*outer join*/
+SELECT artist.name,songs.title
+FROM songs
+LEFT OUTER JOIN artist
+ON artist.id=songs.id;
+
+/*Multiple joins*/
+/* What artists collaborated on songs and what are the song titles?*/
+
+SELECT a1.name,a2.name,s.title 
+FROM collab
+JOIN artist a1 ON a1.id=collab.artist1_id
+JOIN artist a2 ON a2.id=collab.artist2_id 
+JOIN songs s ON s.id = collab.song_id;
+
+/*Who were the top 5 most popular artists?*/
