@@ -1,3 +1,4 @@
+-- tables may be nicknamed eg from table.charlotte tab
 --/or/ command 
     SELECT title FROM songs WHERE mood = "epic" OR released >1990;
     --/ and/ command 
@@ -64,6 +65,8 @@ INNER JOIN base -- "right table"
 (Specify how to connect the tables)
 ON martian.base_id = base.base_id; (martian and base are the table and base 
 is the column id)
+
+the two columns that you are joining are not always going to have the same names even if the numbers are common 
  
 Once the new table has been created we can now write the following function 
 SELECT first_name, last_name, base_name
