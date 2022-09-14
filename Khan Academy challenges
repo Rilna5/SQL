@@ -29,6 +29,10 @@ SELECT * FROM exercise_logs WHERE type IN (
 Math operators may be used at any point in sql 
 Round function may also be used in sql 
 
+/*UPDATE*/
+-we may add more items into an existing table by saying for eg :
+UPDATE item SET order = 9 WHERE ... (UPDATE AND SET )
+
 /CASE/ function is used to create a new column 
 
 /* 50-90% of max*/
