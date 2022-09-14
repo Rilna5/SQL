@@ -5,6 +5,15 @@
     SELECT title FROM songs WHERE mood = "epic" AND released > 1990 AND duration < 240
     
    SELECT * FROM exercise_logs WHERE type = "biking" OR type = "hiking" OR type = "tree climbing" OR type = "rowing";
+/OR AND/ 
+Remember to use brackets when using both functions in a row 
+
+/*UPDATE AND SET*/
+UPDATE item SET name = ... where ... 
+can be used to update items within existing tables 
+
+/*DELETE*/
+Can be used to delete rows from existing tables 
 
 /* IN */ is a shortcut or a neater way to write the querry above. type allows you to select individual items in a column 
 /*NOT IN*/ does the inverse of the IN command, that is, what is not in ()
